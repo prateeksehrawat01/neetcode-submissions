@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isValid(String s) {
+        int len=s.length();
+        if (len%2!=0){
+            return false;
+        }
+        Stack<Character> stack = new Stack<>();
+        Map<Character,Character> pair=new HashMap<>();
+        pair.put(')', '(');
+        pair.put(']', '[');
+        pair.put('}', '{');
+        for (char c : s.toCharArray()){
+            if(pair.containsKey(c)){
+                if(!stack.isEmpty()&& stack.peek()==pair.get(c)){
+                    stack.pop();
+                }else{
+                    return false;
+                }
+            } else{
+                stack.push(c);
+            }
+        }
+        return stack.isEmpty();
+        
+    }
+}
